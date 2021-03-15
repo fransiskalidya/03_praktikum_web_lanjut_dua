@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,16 +22,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(){
-        return view('index');
-    }
-    public function today(){
-        return view('today-special');
-    }
-    public function menu(){
-        return view('menu');
-    }
-    public function contact(){
-        return view('contact');
+    public function index()
+    {
+        $posts = Post::paginate(3);
+        $welcome = 'Welcome to';
+        return view('index', compact('welcome', 'posts'));
     }
 }
